@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .game-container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input {
+            padding: 8px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Number Guessing Game</h1>
+        <p>I'm thinking of a number between 1 and 10</p>
+        <input type="number" id="guess" min="1" max="10">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <p id="result"></p>
+        <button onclick="newGame()" id="newGameBtn" style="display: none;">New Game</button>
+    </div>
+
+    <script>
+        let secretNumber;
+
+        function startGame() {
+            secretNumber = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('result').textContent = '';
+            document.getElementById('guess').value = '';
+            document.getElementById('newGameBtn').style.display = 'none';
+        }
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guess').value);
+            const resultElement = document.getElementById('result');
+
+            if (guess === secretNumber) {
+                resultElement.textContent = 'Congratulations! You guessed it!';
+                document.getElementById('newGameBtn').style.display = 'inline';
+            } else {
+                resultElement.textContent = `Sorry! The number was ${secretNumber}. Try again!`;
+                document.getElementById('newGameBtn').style.display = 'inline';
+            }
+        }
+
+        function newGame() {
+            startGame();
+        }
+
+        // Start the game when page loads
+        startGame();
+    </script>
+</body>
+
+</html>
